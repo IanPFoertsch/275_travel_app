@@ -57,9 +57,10 @@ class SurveyController: UIViewController {
         show modal with new location form
     */
     
-    /* "Done" button press
-        save to database
+    /* "Submit" button press
+    save to database, go to profile screen
     */
     @IBAction func buttonSubmit(sender: UIButton) {
+        
     }
 }

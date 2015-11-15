@@ -1,15 +1,15 @@
 //
-//  HomeController.swift
+//  ChartViewController.swift
 //  TravLog
 //
-//  Created by Paul D'Amora on 10/28/15.
+//  Created by Ben Kaufman on 11/15/15.
 //  Copyright © 2015 TravLog. All rights reserved.
 //
 
-import UIKit
-import CoreLocation
 
-class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDelegate {
+import UIKit
+
+class ChartViewScene: UIViewController, PiechartDelegate {
     
     var total: CGFloat = 20
     
@@ -49,7 +49,7 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
         view.addSubview(piechart)
         views["piechart"] = piechart
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[piechart]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-100-[piechart(==100)]", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-200-[piechart(==200)]", options: [], metrics: nil, views: views))
         
     }
     
@@ -64,14 +64,8 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
     func setInfo(slice: Piechart.Slice) -> String {
         return "\(Int(slice.value * total))/\(Int(total))"
     }
-    // MARK: Properties
-    // outlets for home screen objects (pie chart, location, survey button)
-
-    // MARK: Actions
-    /* User leaves region
-    add local push notification for x hours in the future
-    survey waiting = true
-    */
     
-   
 }
+
+
+

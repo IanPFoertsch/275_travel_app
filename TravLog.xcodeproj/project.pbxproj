@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		188E80A51BF8EFB30042BDDC /* Piechart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E80A41BF8EFB30042BDDC /* Piechart.swift */; };
+		188E80A71BF8FA720042BDDC /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E80A61BF8FA720042BDDC /* ChartViewController.swift */; };
 		18AD7F401BF2747F009F3D2C /* imgs in Resources */ = {isa = PBXBuildFile; fileRef = 18AD7F3F1BF2747F009F3D2C /* imgs */; };
 		DA3455111BD9DD6D00D1AC22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3455101BD9DD6D00D1AC22 /* AppDelegate.swift */; };
 		DA3455131BD9DD6D00D1AC22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3455121BD9DD6D00D1AC22 /* ViewController.swift */; };
@@ -32,7 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18AD7F3F1BF2747F009F3D2C /* imgs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = imgs; path = TravLog/imgs; sourceTree = "<group>"; };
+		188E80A41BF8EFB30042BDDC /* Piechart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Piechart.swift; sourceTree = "<group>"; };
+		188E80A61BF8FA720042BDDC /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		18AD7F3F1BF2747F009F3D2C /* imgs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = imgs; sourceTree = "<group>"; };
 		DA34550D1BD9DD6D00D1AC22 /* TravLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3455101BD9DD6D00D1AC22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3455121BD9DD6D00D1AC22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +75,6 @@
 		DA3455041BD9DD6D00D1AC22 = {
 			isa = PBXGroup;
 			children = (
-				18AD7F3F1BF2747F009F3D2C /* imgs */,
 				DA34550F1BD9DD6D00D1AC22 /* TravLog */,
 				DA3455241BD9DD6D00D1AC22 /* TravLogTests */,
 				DA34550E1BD9DD6D00D1AC22 /* Products */,
@@ -92,8 +95,11 @@
 			children = (
 				DA3455101BD9DD6D00D1AC22 /* AppDelegate.swift */,
 				DA3455121BD9DD6D00D1AC22 /* ViewController.swift */,
+				188E80A61BF8FA720042BDDC /* ChartViewController.swift */,
+				188E80A41BF8EFB30042BDDC /* Piechart.swift */,
 				DA3455141BD9DD6D00D1AC22 /* Main.storyboard */,
 				DA3455171BD9DD6D00D1AC22 /* Assets.xcassets */,
+				18AD7F3F1BF2747F009F3D2C /* imgs */,
 				DA3455341BE1C91300D1AC22 /* SignInController.swift */,
 				DA3455191BD9DD6D00D1AC22 /* LaunchScreen.storyboard */,
 				DA34553A1BE1CF1900D1AC22 /* ContactController.swift */,
@@ -225,9 +231,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA3455371BE1CE9600D1AC22 /* RegisterController.swift in Sources */,
+				188E80A51BF8EFB30042BDDC /* Piechart.swift in Sources */,
 				DA3455351BE1C91300D1AC22 /* SignInController.swift in Sources */,
 				DA34553D1BE1CF3700D1AC22 /* HomeController.swift in Sources */,
 				DA34553B1BE1CF1900D1AC22 /* ContactController.swift in Sources */,
+				188E80A71BF8FA720042BDDC /* ChartViewController.swift in Sources */,
 				DA3455131BD9DD6D00D1AC22 /* ViewController.swift in Sources */,
 				DA3455111BD9DD6D00D1AC22 /* AppDelegate.swift in Sources */,
 				DA3455391BE1CEBF00D1AC22 /* SurveyController.swift in Sources */,

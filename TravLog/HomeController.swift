@@ -10,32 +10,48 @@ import UIKit
 import CoreLocation
 
 class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDelegate {
+    //Variable Declaration
+    var total: CGFloat = 1
+    var itemMode = ""
+    var trainCount: CGFloat = 0.0
+    var planeCount: CGFloat = 0.0
+    var busCount: CGFloat = 0.0
+    var carCount: CGFloat = 0.0
+    var otherCount: CGFloat = 0.0
     
-    var total: CGFloat = 20
+    
+    
     
     override func viewDidLoad() {
+        
+        getRefresh()
         super.viewDidLoad()
         
+        
+    }
+    
+    func makePie(){
+        //make piechart
         var views: [String: UIView] = [:]
         
         var Car = Piechart.Slice()
-        Car.value = 5 / total
+        Car.value = carCount / total
         Car.color = UIColor.magentaColor()
         Car.text = "Car"
         
         var Train = Piechart.Slice()
-        Train.value = 6 / total
+        Train.value = trainCount / total
         Train.color = UIColor.blueColor()
         Train.text = "Train"
         
         var Bus = Piechart.Slice()
-        Bus.value = 4 / total
+        Bus.value = busCount / total
         Bus.color = UIColor.orangeColor()
         Bus.text = "Bus"
         
         var Plane = Piechart.Slice()
-        Plane.value = 5 / total
-        Plane.color = UIColor.magentaColor()
+        Plane.value = planeCount / total
+        Plane.color = UIColor.redColor()
         Plane.text = "Plane"
         
         let piechart = Piechart()
@@ -50,19 +66,100 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
         views["piechart"] = piechart
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[piechart]-|", options: [], metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-100-[piechart(==100)]", options: [], metrics: nil, views: views))
-        
     }
+    
+    /*
+    Get Request
+    */
+    
+    func getRefresh() {
+        
+        let userName = "FlerpMerp"
+        
+        let urlstr : String = "http://ec2-54-208-153-2.compute-1.amazonaws.com/Travlog/location?userIdentifier="+userName
+        print (urlstr)
+        guard let url = NSURL(string: urlstr) else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        let urlRequest = NSMutableURLRequest(URL: url)
+        
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue:NSOperationQueue.mainQueue(), completionHandler: {
+            (response, data, error) in
+            
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                return
+            }
+            guard error == nil else {
+                print("error calling GET")
+                print(error)
+                return
+            }
+            
+            let dict : NSDictionary
+            do {
+                dict =
+                    try NSJSONSerialization.JSONObjectWithData(responseData, options: [])
+                    as! NSDictionary as! [String : NSArray]
+            } catch  {
+                print("error trying to convert data to JSON")
+                return
+            }
+            if let locations = dict["locations"]
+            {
+                //print(locations[0]["mode"])
+                self.total = CGFloat(locations.count)
+                for index in 0...(locations.count-1) {
+                    
+                    let itemMode = String(locations[index]["mode"])
+                    print(itemMode)
+                    //var itemMode = locations[index]["mode"]
+                    
+                    if itemMode == "Optional(Train)"
+                        {
+                            self.trainCount++
+                        }
+                    if itemMode == "Optional(Bus)"
+                        {
+                            self.busCount++
+                        }
+                    if itemMode == "Optional(Plane)"
+                        {
+                            self.planeCount++
+                        }
+                    if itemMode == "Optional(Other)"
+                        {
+                            self.otherCount++
+                        }
+                    print(self.trainCount)
+                    self.makePie()
+                }
+                
+                //locationIterator(locations)
+            }
+            })
+
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     func setSubtitle(slice: Piechart.Slice) -> String {
         return "\(Int(slice.value * 100))% \(slice.text)"
     }
     
     func setInfo(slice: Piechart.Slice) -> String {
         return "\(Int(slice.value * total))/\(Int(total))"
+    }
+    
+    func locationIterator(array:NSArray) {
+        for element in array{
+            print("\(element)")
+        }
     }
     // MARK: Properties
     // outlets for home screen objects (pie chart, location, survey button)
@@ -73,5 +170,5 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
     survey waiting = true
     */
     
-   
+    
 }

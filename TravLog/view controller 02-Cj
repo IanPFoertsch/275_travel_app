@@ -1,0 +1,168 @@
+//
+//  ViewController.swift
+//  iAmTryingHard
+//
+//  Created by YuChi(Cj) ZHANG on 11/5/15.
+//  Copyright © 2015 YuChi(Cj) ZHANG. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    @IBOutlet weak var signInUsername: UITextField!
+    @IBOutlet weak var signInPassword: UITextField!
+    
+    @IBOutlet weak var registerEmail: UITextField!
+    @IBOutlet weak var registerUsername: UITextField!
+    @IBOutlet weak var registerPassword: UITextField!
+    @IBOutlet weak var registerRePassword: UITextField!
+    @IBOutlet weak var registerStartButton: UIButton!
+    
+    @IBOutlet weak var helloUser: UILabel!
+    
+    //pop-up messege for Registration form
+    @IBOutlet weak var registerInfoIndicator: UILabel!
+    @IBOutlet weak var signInIndicator: UILabel!
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func signInNextButton(sender: AnyObject) {
+        if(signInUsername.text==""){
+            signInIndicator.text="Please enter a username"
+            
+            let disableMyButton = sender as? UIButton
+            disableMyButton!.enabled = false
+        }
+        else if(signInPassword.text==""){
+            signInIndicator.text="Please enter a password"
+            
+            let disableMyButton = sender as? UIButton
+            disableMyButton!.enabled = false
+        }
+        
+        let disableMyButton = sender as? UIButton
+        disableMyButton!.enabled = true
+        
+        //helloUser.text="hello, cj"
+        
+    }
+    
+
+    @IBAction func registerStartButton(sender: AnyObject) {
+        
+        print("reach A")
+        
+        //helloUser.text=registerUsername.text
+        
+        if(registerEmail.text==""){
+            registerInfoIndicator.text="Please enter a vaild email"
+        }
+        else if(registerUsername.text==""){
+            registerInfoIndicator.text="Please enter an Username"
+        }
+        else if(registerPassword.text==""){
+            registerInfoIndicator.text="Please create a Password"
+        }
+        else if(registerRePassword.text==""){
+            registerInfoIndicator.text="Please Re-enter you password"
+        }
+        
+        //sendPostRequest accepts a Swift dictionary of String:anyObjects, serializes it
+        //to a json string and POSTS the string to a server location specified by the
+        //urlstr parameter
+        //Example use: for a profile object
+        
+        print("reach B")
+        
+         let JSONObject: [String:AnyObject] = [
+           "userIdentifier":"testtesttest",
+           "adults":1,
+           "teenagers":1,
+           "children":1,
+           "age":29,
+           "gender":"m",
+           "homelocation_x":1.0,
+           "homelocation_y":1.0,
+           "worklocation_x":1.0,
+           "worklocation_y":1.0,
+            "password":"444"
+         ]
+        
+        let location : String =
+        "http://ec2-54-208-153-2.compute-1.amazonaws.com/Travlog/profile"
+        
+        sendPostRequest(JSONObject, urlstr: location)
+        
+        print("reach C")
+        
+        
+        //Example use for a location object
+        // let locationObject: [String:AnyObject] = [
+        //    "locationX":1.0,
+        //    "locationY":10,
+        //    "mode":"flerp",
+        //    "purpose":"derp",
+        //    "userIdentifier":"FlerpMerp",
+        //    "recordDate":27.0
+        
+        
+        //let otherLocation: String = "http://ec2-54-208-153-2.compute-1.amazonaws.com/Travlog/location"
+        
+        //sendPostRequest(locationObject, urlstr: otherLocation)
+        
+    }
+    
+    func sendPostRequest(sendMe:[String:AnyObject], urlstr:String){
+        
+        guard let url = NSURL(string: urlstr) else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        let urlRequest = NSMutableURLRequest(URL: url)  // must be mutable to set the http method
+        urlRequest.HTTPMethod = "POST"
+        
+        
+        urlRequest.setValue("application/json", forHTTPHeaderField:"Content-Type")
+        
+        //let dataExample : NSData = NSKeyedArchiver.archivedDataWithRootObject(JSONObject)
+        
+        do {
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(sendMe, options: [])
+            //print(jsonData)
+            //let string = NSString(data:jsonData, encoding:NSUTF8StringEncoding)
+            //print(string)
+            urlRequest.HTTPBody = jsonData
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue:NSOperationQueue.mainQueue(), completionHandler: {
+                (response, data, error) in
+                
+                guard let _ = data else {
+                    print("Error: did not receive data")
+                    return
+                }
+                guard error == nil else {
+                    print("error calling POST")
+                    print(error)
+                    return
+                }
+            })
+        } catch {
+            print("json error: \(error)")
+        }
+    }
+    
+    //aaaaaaaaaaaaaaaa-------------
+    
+
+}
+

@@ -17,41 +17,16 @@ class SurveyController: UIViewController {
     
     // MARK: Properties
     // outlets for survey form objects
-    @IBOutlet weak var labelMode: UILabel!
     
-  
     // MARK: Actions
     /* Two variables we need to worry about (mode, reason)
         Each button has an action and will change those variables
     */
-    @IBAction func buttonPlane(sender: UIButton) {
-        let mode = sender.currentTitle!
-        labelMode.text = sender.currentTitle!
-        print ("mode = \(mode)")
-    }
-    @IBAction func buttonBus(sender: UIButton) {
-        let mode = sender.currentTitle!
-        labelMode.text = sender.currentTitle!
-        print ("mode = \(mode)")
-    }
-    @IBAction func buttonTrain(sender: UIButton) {
-        let mode = sender.currentTitle!
-        labelMode.text = sender.currentTitle!
-        print ("mode = \(mode)")
-    }
-    @IBAction func buttonOther(sender: UIButton) {
-        let mode = sender.currentTitle!
-        labelMode.text = sender.currentTitle!
-        print ("mode = \(mode)")
-    }
-    
     
     /* "I Didn't Travel" button press
         survey waiting = false
         proceed to home screen
     */
-    @IBAction func buttonDidntTravel(sender: UIButton) {
-    }
     
     /* "Wrong Location" button press
         show modal with new location form
@@ -60,6 +35,4 @@ class SurveyController: UIViewController {
     /* "Done" button press
         save to database
     */
-    @IBAction func buttonSubmit(sender: UIButton) {
-    }
 }

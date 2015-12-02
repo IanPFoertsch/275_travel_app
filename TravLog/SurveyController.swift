@@ -2,7 +2,7 @@
 //  SurveryController.swift
 //  TravLog
 //
-//  Created by Paul D'Amora on 10/24/15.
+//  Created by Ben Kaufman on 10/24/15.
 //  Copyright © 2015 TravLog. All rights reserved.
 //
 
@@ -72,12 +72,16 @@ class SurveyController: UIViewController {
         let time: Double = date*1000
         
         let locationObject: [String:AnyObject] = [
-            "locationX":1.0,
-            "locationY":10,
-            "mode":labelMode.text!,
-            "purpose":"derp",
-            "userIdentifier":"FlerpMerp",
-            "recordDate":time
+
+                    "locationLong":1.0,
+                    "locationLat":1.0,
+                    "mode":labelMode.text!,
+                    "purpose":"business",
+                    "speed":1.0,
+                    "course":1.0,
+                    "altitude":1.0,
+                    "userIdentifier":"IanFoertsch",
+                    "recordDate":time
         ]
         
         let urlString: String = "http://ec2-54-208-153-2.compute-1.amazonaws.com/Travlog/location"

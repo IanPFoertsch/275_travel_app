@@ -101,10 +101,10 @@
 				DA3455171BD9DD6D00D1AC22 /* Assets.xcassets */,
 				18AD7F3F1BF2747F009F3D2C /* imgs */,
 				DA3455341BE1C91300D1AC22 /* SignInController.swift */,
-				DA3455191BD9DD6D00D1AC22 /* LaunchScreen.storyboard */,
 				DA34553A1BE1CF1900D1AC22 /* ContactController.swift */,
 				DA3455381BE1CEBF00D1AC22 /* SurveyController.swift */,
 				DA34553C1BE1CF3700D1AC22 /* HomeController.swift */,
+				DA3455191BD9DD6D00D1AC22 /* LaunchScreen.storyboard */,
 				DA34553E1BE26F3D00D1AC22 /* Supporting Files */,
 				DA3455361BE1CE9600D1AC22 /* RegisterController.swift */,
 			);

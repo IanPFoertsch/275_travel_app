@@ -645,6 +645,13 @@
                                     <segue destination="gGX-bt-7ut" kind="show" id="YTy-8N-iGF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUD-bn-aqE">
+                                <rect key="frame" x="20" y="373" width="128" height="128"/>
+                                <state key="normal" title="Car" image="imgs/ufo.png"/>
+                                <connections>
+                                    <action selector="buttonCar:" destination="gwg-sr-GKg" eventType="touchUpInside" id="ebI-48-oUX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

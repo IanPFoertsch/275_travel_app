@@ -13,19 +13,16 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
     //Variable Declaration
     var total: CGFloat = 1
     var itemMode = ""
-    var trainCount: CGFloat = 0.0
-    var planeCount: CGFloat = 0.0
     var busCount: CGFloat = 0.0
+    var planeCount: CGFloat = 0.0
     var carCount: CGFloat = 0.0
+    var trainCount: CGFloat = 0.0
     var otherCount: CGFloat = 0.0
-    
-    
-    
-    
+
     override func viewDidLoad() {
         
-        getRefresh()
-        super.viewDidLoad()
+    getRefresh()
+    super.viewDidLoad()
         
         
     }
@@ -33,16 +30,6 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
     func makePie(){
         //make piechart
         var views: [String: UIView] = [:]
-        
-        var Car = Piechart.Slice()
-        Car.value = carCount / total
-        Car.color = UIColor.magentaColor()
-        Car.text = "Car"
-        
-        var Train = Piechart.Slice()
-        Train.value = trainCount / total
-        Train.color = UIColor.blueColor()
-        Train.text = "Train"
         
         var Bus = Piechart.Slice()
         Bus.value = busCount / total
@@ -54,12 +41,27 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
         Plane.color = UIColor.redColor()
         Plane.text = "Plane"
         
+        var Car = Piechart.Slice()
+        Car.value = carCount / total
+        Car.color = UIColor.magentaColor()
+        Car.text = "Car"
+        
+        var Train = Piechart.Slice()
+        Train.value = trainCount / total
+        Train.color = UIColor.blueColor()
+        Train.text = "Train"
+        
+        var Other = Piechart.Slice()
+        Other.value = otherCount / total
+        Other.color = UIColor.grayColor()
+        Other.text = "Other"
+        
         let piechart = Piechart()
         piechart.delegate = self
         piechart.title = "Mode Choice"
         piechart.activeSlice = 2
         piechart.layer.borderWidth = 1
-        piechart.slices = [Car, Train, Bus, Plane]
+        piechart.slices = [Bus, Plane, Car, Train,  Other]
         
         piechart.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(piechart)
@@ -74,6 +76,7 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
     
     func getRefresh() {
         
+        //Username
         let userName = "FlerpMerp"
         
         let urlstr : String = "http://ec2-54-208-153-2.compute-1.amazonaws.com/Travlog/location?userIdentifier="+userName
@@ -109,18 +112,11 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
             }
             if let locations = dict["locations"]
             {
-                //print(locations[0]["mode"])
                 self.total = CGFloat(locations.count)
                 for index in 0...(locations.count-1) {
                     
                     let itemMode = String(locations[index]["mode"])
-                    print(itemMode)
-                    //var itemMode = locations[index]["mode"]
                     
-                    if itemMode == "Optional(Train)"
-                        {
-                            self.trainCount++
-                        }
                     if itemMode == "Optional(Bus)"
                         {
                             self.busCount++
@@ -129,15 +125,21 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
                         {
                             self.planeCount++
                         }
+                    if itemMode == "Optional(Car)"
+                        {
+                            self.carCount++
+                        }
+                    if itemMode == "Optional(Train)"
+                        {
+                            self.trainCount++
+                        }
                     if itemMode == "Optional(Other)"
                         {
                             self.otherCount++
                         }
-                    print(self.trainCount)
                     self.makePie()
                 }
                 
-                //locationIterator(locations)
             }
             })
 
@@ -161,8 +163,6 @@ class HomeController: UIViewController, CLLocationManagerDelegate , PiechartDele
             print("\(element)")
         }
     }
-    // MARK: Properties
-    // outlets for home screen objects (pie chart, location, survey button)
 
     // MARK: Actions
     /* User leaves region

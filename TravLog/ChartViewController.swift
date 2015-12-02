@@ -38,12 +38,17 @@ class ChartViewScene: UIViewController, PiechartDelegate {
         Plane.color = UIColor.magentaColor()
         Plane.text = "Plane"
         
+        var Other = Piechart.Slice()
+        Other.value = 5 / total
+        Other.color = UIColor.magentaColor()
+        Other.text = "Other"
+        
         let piechart = Piechart()
         piechart.delegate = self
         piechart.title = "Mode Choice"
         piechart.activeSlice = 2
         piechart.layer.borderWidth = 1
-        piechart.slices = [Car, Train, Bus, Plane]
+        piechart.slices = [Car, Train, Bus, Plane, Other]
         
         piechart.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(piechart)
